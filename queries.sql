@@ -24,7 +24,7 @@ SELECT DISTINCT ON (customer_id)
 FROM dannys_diner.sales
 ORDER BY customer_id, order_date;
 
--- 4 Qual é o item mais comprado do menu e quantas vezes ele foi comprado por todos os clientes?
+-- 4. Qual é o item mais comprado do menu e quantas vezes ele foi comprado por todos os clientes?
 
 SELECT 	
   m.product_name,
@@ -37,4 +37,31 @@ GROUP BY s.product_id, m.product_name
 ORDER BY total_vezes_compra DESC
 LIMIT 1;
 
+-- 5. Qual item foi o mais popular para cada cliente?
 
+SELECT DISTINCT ON (s.customer_id)
+	s.customer_id,
+	s.product_id, 
+	COUNT(*) AS prod_popular
+
+FROM dannys_diner.sales AS s
+GROUP BY s.customer_id, s.product_id
+ORDER BY s.customer_id, COUNT(*) DESC;
+
+
+-- 6. Qual item foi comprado primeiro pelo cliente depois que ele se tornou membro?
+
+/* Nessa questão foi considerado o próximo dia a partir da data que o cliente virou membro, pois temos um caso que
+o cliente A virou membro e fez um pedido no mesmo dia, não é possível saber se ele fez o pedido antes 
+ou depois de se tornar membro, por isso a query foi feita considerando o dia primeiro dia após a data que o cliente virou membro. */
+
+SELECT DISTINCT ON(m.customer_id)
+	m.customer_id,
+	m.join_date,
+	s.order_date,
+	s.product_id
+
+FROM dannys_diner.members AS m
+JOIN dannys_diner.sales AS s ON m.customer_id = s.customer_id
+WHERE s.order_date > m.join_date
+ORDER BY m.customer_id, s.order_date ASC;
