@@ -93,3 +93,18 @@ WHERE s.order_date < mb.join_date
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
 
+-- 9. Se cada US$ 1 gasto equivale a 10 pontos e o sushi tem um multiplicador de pontos de 2x, quantos pontos cada cliente teria?
+
+SELECT 
+	s.customer_id,
+	s.product_id,
+	mn.price,
+	mn.price * 
+		CASE 
+			WHEN s.product_id = 1 THEN 20
+			ELSE 10
+		END AS total_de_pontos
+
+FROM dannys_diner.sales AS s
+JOIN dannys_diner.menu AS mn ON s.product_id = mn.product_id
+ORDER BY s.customer_id;
