@@ -53,7 +53,7 @@ ORDER BY s.customer_id, COUNT(*) DESC;
 
 /* Nessa questão foi considerado o próximo dia a partir da data que o cliente virou membro, pois temos um caso que
 o cliente A virou membro e fez um pedido no mesmo dia, não é possível saber se ele fez o pedido antes 
-ou depois de se tornar membro, por isso a query foi feita considerando o dia primeiro dia após a data que o cliente virou membro. */
+ou depois de se tornar membro, por isso a query foi feita considerando o primeiro dia após a data que o cliente virou membro. */
 
 SELECT DISTINCT ON(m.customer_id)
 	m.customer_id,
@@ -65,3 +65,31 @@ FROM dannys_diner.members AS m
 JOIN dannys_diner.sales AS s ON m.customer_id = s.customer_id
 WHERE s.order_date > m.join_date
 ORDER BY m.customer_id, s.order_date ASC;
+
+-- 7. Qual item foi comprado pouco antes do cliente se tornar um membro?
+
+SELECT DISTINCT ON(m.customer_id)
+	m.customer_id,
+	m.join_date,
+	s.order_date,
+	s.product_id
+
+FROM dannys_diner.members AS m
+JOIN dannys_diner.sales AS s ON m.customer_id = s.customer_id
+WHERE s.order_date < m.join_date
+ORDER BY m.customer_id, s.order_date DESC;
+
+-- 8. Qual é o total de itens e valores gastos por cada membro antes de se tornar membro?
+
+SELECT 
+	s.customer_id, 
+	COUNT(*) AS total_itens,
+	SUM(mn.price) AS total_gasto
+
+FROM dannys_diner.sales AS s
+JOIN dannys_diner.members AS mb ON s.customer_id = mb.customer_id
+JOIN dannys_diner.menu AS mn ON s.product_id = mn.product_id
+WHERE s.order_date < mb.join_date
+GROUP BY s.customer_id
+ORDER BY s.customer_id;
+
