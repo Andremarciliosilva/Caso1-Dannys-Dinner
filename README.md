@@ -100,14 +100,41 @@ Danny's Diner.
 Cada uma das seguintes perguntas do estudo de caso pode ser respondida usando uma única instrução SQL:
 
 1. Qual foi o valor total gasto por cada cliente no restaurante?
+
+![logo](img/1.png) 
+
 2. Há quantos dias cada cliente visita o restaurante?
+
+![logo](img/2.png) 
+
 3. Qual foi o primeiro item do menu comprado por cada cliente?
+
+![logo](img/3.png) 
+
 4. Qual é o item mais comprado do menu e quantas vezes ele foi comprado por todos os clientes?
+
+![logo](img/4.png) 
+
 5. Qual item foi o mais popular para cada cliente?
+
+![logo](img/5.png)
+
 6. Qual item foi comprado primeiro pelo cliente depois que ele se tornou membro?
+
+![logo](img/6.png) 
+
 7. Qual item foi comprado pouco antes do cliente se tornar um membro?
+
+![logo](img/7.png) 
+
 8. Qual é o total de itens e valores gastos por cada membro antes de se tornar membro?
+
+![logo](img/8.png) 
+
 9. Se cada US$ 1 gasto equivale a 10 pontos e o sushi tem um multiplicador de pontos de 2x, quantos pontos cada cliente teria?
+
+![logo](img/9.png) 
+
 10. Na primeira semana após um cliente aderir ao programa (incluindo a data de adesão), ele ganha o dobro de pontos em todos os itens, 
 não apenas em sushi. Quantos pontos os clientes A e B têm no final de janeiro?
 </div>
