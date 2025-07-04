@@ -27,8 +27,7 @@ ORDER BY customer_id, order_date;
 -- 4. Qual é o item mais comprado do menu e quantas vezes ele foi comprado por todos os clientes?
 
 SELECT 	
-  m.product_name,
-	s.product_id, 
+	m.product_name,
 	COUNT(*) AS total_vezes_compra
 FROM dannys_diner.sales AS s
 INNER JOIN dannys_diner.menu AS m 
@@ -41,7 +40,6 @@ LIMIT 1;
 
 SELECT DISTINCT ON (s.customer_id)
 	s.customer_id,
-	s.product_id, 
 	COUNT(*) AS prod_popular
 
 FROM dannys_diner.sales AS s
